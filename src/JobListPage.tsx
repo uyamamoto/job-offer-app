@@ -54,7 +54,7 @@ const JobListPage: React.FC<JobListPageProps> = ({ jobs }) => {
   return (
     <div className="flex">
       <div className="w-1/4 p-4 border-r bg-gray-300">
-        <h2 className="font-bold mb-2">求人カテゴリ</h2>
+        <h2 className="font-bold mb-2 text-xl">求人カテゴリ</h2>
         <div className="mb-4">
           <input type="checkbox" value="事務" onChange={handleCategoryChange} />
           <label className="ml-2">事務</label>
@@ -104,7 +104,7 @@ const JobListPage: React.FC<JobListPageProps> = ({ jobs }) => {
         </select>
       </div>
       <div className="w-3/4 p-4">
-      <h2 className="font-bold mb-2">求人一覧</h2>
+      <h2 className="font-bold mb-2 text-2xl">求人一覧</h2>
       <p>該当件数: {filteredJobs.length}件</p>
         {filteredJobs.length > 0 ? (
           currentJobs.map(job => (

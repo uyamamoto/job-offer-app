@@ -33,7 +33,7 @@ const App: React.FC = () => {
     <Router>
       <div>
         <nav className="p-4 bg-gray-800 text-white flex">
-          <h1 className="text-2xl">求人検索アプリ</h1>
+          <h1 className="text-2xl font-bold">求人検索アプリ</h1>
           <div className="ml-auto">
             <Link to="/" className="mr-4">求人検索</Link>
             <Link to="/post">求人投稿</Link>

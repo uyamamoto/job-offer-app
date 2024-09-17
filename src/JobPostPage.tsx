@@ -30,18 +30,18 @@ const JobPostPage: React.FC<JobPostPageProps> = ({ addJob }) => {
 
 
   return (
-    <div className="p-4">
-      <h2 className="font-bold mb-4">求人投稿</h2>
+    <div className="p-10">
+      <h2 className="font-bold mb-4 text-2xl">求人投稿</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block">求人カテゴリ</label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="border p-2 w-full"
+            className="border w-64 p-2 w-full border-gray-400"
             required
           >
-            <option value="">カテゴリを選択</option>
+            <option value="">カテゴリを選択▼</option>
             <option value="事務">事務</option>
             <option value="エンジニア">エンジニア</option>
             <option value="営業">営業</option>
@@ -60,7 +60,7 @@ const JobPostPage: React.FC<JobPostPageProps> = ({ addJob }) => {
             type="number"
             value={salary}
             onChange={(e) => setSalary(e.target.value)}
-            className="border p-2 w-full"
+            className="border w-64 p-2 w-full border-gray-400"
             required
           />
         </div>
@@ -70,13 +70,13 @@ const JobPostPage: React.FC<JobPostPageProps> = ({ addJob }) => {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="border p-2 w-full"
+            className="border p-2 w-full border-gray-400"
             required
            />
         </div>
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-blue-500 w-48 text-white px-4 py-2 rounded hover:bg-blue-700 mt-4"
         >
           投稿
         </button>
