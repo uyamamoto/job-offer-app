@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Link, Routes} from "react-router-dom";
-import JobListPage from "./JobListPage";
-import JobPostPage from "./JobPostPage";
+import JobListPage from "./components/JobListPage";
+import JobPostPage from "./components/JobPostPage";
 
 type Job = {
   id: number;
