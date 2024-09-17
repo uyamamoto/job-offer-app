@@ -53,7 +53,7 @@ const JobListPage: React.FC<JobListPageProps> = ({ jobs }) => {
 
   return (
     <div className="flex">
-      <div className="w-1/4 p-4 border-r bg-gray-300">
+      <div className="w-400 p-4 border-r bg-gray-300">
         <h2 className="font-bold mb-2 text-xl">求人カテゴリ</h2>
         <div className="mb-4">
           <input type="checkbox" value="事務" onChange={handleCategoryChange} />
@@ -103,7 +103,7 @@ const JobListPage: React.FC<JobListPageProps> = ({ jobs }) => {
           <option value="700">700万円以上</option>          
         </select>
       </div>
-      <div className="w-3/4 p-4">
+      <div className="flex-grow p-4">
       <h2 className="font-bold mb-2 text-2xl">求人一覧</h2>
       <p>該当件数: {filteredJobs.length}件</p>
         {filteredJobs.length > 0 ? (
