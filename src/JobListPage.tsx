@@ -111,7 +111,7 @@ const JobListPage: React.FC<JobListPageProps> = ({ jobs }) => {
             <div key={job.id} className="border p-4 mb-2 border-gray-400 rounded-lg">
               <h3 className="font-bold">{job.title}</h3>
               <p>カテゴリ: {job.category}</p>
-              <p>年収: {job.salary}</p>
+              <p>年収: {job.salary}万円</p>
             </div>
           ))
         ) : (
