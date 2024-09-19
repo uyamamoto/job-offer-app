@@ -5,6 +5,7 @@ interface JobPostPageProps {
   addJob: (newJob: { id: number; title: string; category: string; salary: string }) => void;
 }
 
+// 求人投稿フォーム表示のためのコンポーネント
 const JobPostPage: React.FC<JobPostPageProps> = ({ addJob }) => {
 
   const [category, setCategory] = useState<string>("");

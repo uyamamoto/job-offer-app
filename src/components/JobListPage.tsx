@@ -11,6 +11,7 @@ interface JobListPageProps {
   jobs: Job[];
 }
 
+// 求人リスト表示のためのコンポーネント
 const JobListPage: React.FC<JobListPageProps> = ({ jobs }) => {
 
   const [categoryFilter, setCategoryFilter] = useState<string[]>([]);
