@@ -39,6 +39,10 @@ const JobList: React.FC<JobListPageProps> = ({ jobs }) => {
   };
 
   const handleDelete = async (jobId: number): Promise<void> => {
+    const confirmed = window.confirm("本当にこの投稿を削除しますか？");
+
+    if (!confirmed) return;
+
     try {
       const response = await fetch("/api/jobs", {
         method: "DELETE",
@@ -58,7 +62,7 @@ const JobList: React.FC<JobListPageProps> = ({ jobs }) => {
         false
       );
       // リロード
-      window.location.reload()
+      window.location.reload();
     } catch (error) {
       console.error("エラーが発生しました: ", error);
     }
