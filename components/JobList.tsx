@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { mutate } from "swr";
+import { useRouter } from "next/navigation";
 
 type Job = {
   id: number;
@@ -20,6 +21,7 @@ const JobList: React.FC<JobListPageProps> = ({ jobs }) => {
   const [salaryFilter, setSalaryFilter] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const jobsPerPage = 5; // 1ページあたりに表示する求人の件数
+  const router = useRouter();
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -74,6 +76,9 @@ const JobList: React.FC<JobListPageProps> = ({ jobs }) => {
       Number(job.salary) >= Number(salaryFilter)
     );
   });
+
+  // 求人投稿をid順に並べる
+  filteredJobs.sort((a, b) => a.id - b.id);
 
   // 現在のページに表示する求人のリスト
   const indexOfLastJob = currentPage * jobsPerPage;
@@ -173,6 +178,12 @@ const JobList: React.FC<JobListPageProps> = ({ jobs }) => {
               <h3 className="font-bold">{job.title}</h3>
               <p>カテゴリ: {job.category}</p>
               <p>年収: {job.salary}万円</p>
+              <button
+                onClick={() => router.push(`/edit/${job.id}`)}
+                className="absolute bottom-2 right-32 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600"
+              >
+                投稿を編集
+              </button>
               <button
                 onClick={() => handleDelete(job.id)} // 削除処理のハンドラ関数
                 className="absolute bottom-2 right-2 px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600"
