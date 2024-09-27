@@ -27,3 +27,24 @@ export async function GET() {
 
   return NextResponse.json(data);
 }
+
+export async function DELETE(request: Request) {
+  // リクエストボディから削除対象の投稿IDを取得
+  const { id } = await request.json();
+
+  if (!id) {
+    return NextResponse.json({ error: "IDが不正です" }, { status: 400 });
+  }
+
+  // Supabaseからデータを削除
+  const { error } = await supabase
+    .from("jobs")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500});
+  }
+
+  return NextResponse.json({ message: "求人が削除されました"});
+}

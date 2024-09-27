@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { mutate } from "swr";
 
 type Job = {
   id: number;
@@ -35,6 +36,32 @@ const JobList: React.FC<JobListPageProps> = ({ jobs }) => {
     const value = event.target.value;
     setSalaryFilter(value);
     paginate(1);
+  };
+
+  const handleDelete = async (jobId: number): Promise<void> => {
+    try {
+      const response = await fetch("/api/jobs", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: jobId }),
+      });
+
+      if (!response.ok) {
+        throw new Error("データの削除に失敗しました");
+      }
+      // 削除したデータを"api/jobs"のキャッシュから削除
+      mutate(
+        "api/jobs",
+        (jobs: Job[] = []) => jobs.filter((j) => j.id !== jobId),
+        false
+      );
+      // リロード
+      window.location.reload()
+    } catch (error) {
+      console.error("エラーが発生しました: ", error);
+    }
   };
 
   const filteredJobs = jobs.filter((job) => {
@@ -137,11 +164,17 @@ const JobList: React.FC<JobListPageProps> = ({ jobs }) => {
           currentJobs.map((job) => (
             <div
               key={job.id}
-              className="border p-4 mb-2 border-gray-400 rounded-lg"
+              className="relative border p-4 mb-2 border-gray-400 rounded-lg"
             >
               <h3 className="font-bold">{job.title}</h3>
               <p>カテゴリ: {job.category}</p>
               <p>年収: {job.salary}万円</p>
+              <button
+                onClick={() => handleDelete(job.id)} // 削除処理のハンドラ関数
+                className="absolute bottom-2 right-2 px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              >
+                投稿を削除
+              </button>
             </div>
           ))
         ) : (
