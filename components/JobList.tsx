@@ -178,18 +178,20 @@ const JobList: React.FC<JobListPageProps> = ({ jobs }) => {
               <h3 className="font-bold">{job.title}</h3>
               <p>カテゴリ: {job.category}</p>
               <p>年収: {job.salary}万円</p>
-              <button
-                onClick={() => router.push(`/edit/${job.id}`)}
-                className="absolute bottom-2 right-32 px-3 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600"
-              >
-                投稿を編集
-              </button>
-              <button
-                onClick={() => handleDelete(job.id)} // 削除処理のハンドラ関数
-                className="absolute bottom-2 right-2 px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600"
-              >
-                投稿を削除
-              </button>
+              <div className="mt-2 button-group flex flex-col sm:flex-row sm:absolute sm:bottom-2 sm:right-2 space-y-2 sm:space-y-0 sm:space-x-2">
+                <button
+                  onClick={() => router.push(`/edit/${job.id}`)}
+                  className="w-24 px-3 py-1 bg-green-500 text-sm text-white rounded-lg hover:bg-green-600 sm:w-28 sm:text-base"
+                >
+                  投稿を編集
+                </button>
+                <button
+                  onClick={() => handleDelete(job.id)} // 削除処理のハンドラ関数
+                  className="w-24 px-3 py-1 bg-red-500 text-sm text-white rounded-lg hover:bg-red-600 sm:w-28 sm:text-base"
+                >
+                  投稿を削除
+                </button>
+              </div>
             </div>
           ))
         ) : (

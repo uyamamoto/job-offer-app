@@ -126,6 +126,7 @@ const JobEdit: React.FC = () => {
             onChange={(e) => setTitle(e.target.value)}
             className="border p-2 w-full border-gray-400"
             required
+            maxLength={255}
           />
         </div>
         <button
