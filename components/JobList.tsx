@@ -91,7 +91,7 @@ const JobList: React.FC<JobListPageProps> = ({ jobs }) => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <div className="flex dark:bg-white">
+    <div className="min-h-screen flex dark:bg-white">
       <div className="w-400 p-4 border-r bg-gray-300 dark:text-black">
         <h2 className="font-bold mb-2 text-xl">求人カテゴリ</h2>
         <div className="mb-4">

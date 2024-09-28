@@ -9,7 +9,7 @@ type Job = {
   title: string;
   category: string;
   salary: string;
-}
+};
 
 // 求人投稿フォーム表示のためのコンポーネント
 const JobPost: React.FC = () => {
@@ -17,17 +17,27 @@ const JobPost: React.FC = () => {
   const [salary, setSalary] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // salaryの数値の範囲に関するメッセージ
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // formタグのデフォルトのアクションを無効化
 
-    if (title && category && salary) {
+    // salaryが範囲内の数値であるかを判定する関数
+    const isSalaryValid = (salary: string) => {
+      const temp = Number(salary);
+      return !isNaN(temp) && temp >= 1 && temp <= 9999;
+    };
+
+    if (title && category && isSalaryValid(salary)) {
       const newJob = {
         id: Math.floor(Math.random() * 1000000), // ランダムなIDを生成
         title: title,
         category: category,
         salary: salary,
       };
+
+      // 既存のエラーメッセージをクリア
+      setErrorMessage(null);
 
       try {
         // 新規求人情報をDBにPOST
@@ -50,6 +60,13 @@ const JobPost: React.FC = () => {
         router.push("/jobs");
       } catch (error) {
         console.error("エラーが発生しました: ", error);
+      }
+    } else {
+      // salaryが無効な場合の警告メッセージ
+      if (!isSalaryValid(salary)) {
+        setErrorMessage("年収は1〜9999万円の範囲で指定してください");
+      } else {
+        setErrorMessage(null); // salaryが有効な場合は警告をクリア
       }
     }
   };
@@ -87,18 +104,17 @@ const JobPost: React.FC = () => {
             onChange={(e) => setSalary(e.target.value)}
             className="border w-64 p-2 w-full border-gray-400"
             required
-            min="1"
           />
         </div>
         <div className="mb-4">
-          <label className="block">求人タイトル</label>
+          <label className="block">求人タイトル (100字以内)</label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="border p-2 w-full border-gray-400"
             required
-            maxLength={255}
+            maxLength={100}
           />
         </div>
         <button
@@ -107,6 +123,8 @@ const JobPost: React.FC = () => {
         >
           投稿
         </button>
+        {/* エラーメッセージの表示 */}
+        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       </form>
     </div>
   );
